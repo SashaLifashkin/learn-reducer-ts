@@ -21,21 +21,28 @@ const amountReducer = (amount, action) => {
 };
 const createStore = (reducer, initialState) => {
     let state = initialState;
+    // const callbacks: Array<(...args: any[]) => any> = []
+    // const callbacks: Array<(...args: unknown[]) => unknown> = []
+    const callbacks = [];
     return {
         getState() {
             return state;
         },
         dispatch(action) {
             state = reducer(state, action);
+            callbacks.forEach(f => f());
+        },
+        subscribe(func) {
+            // subscribe(func: (...args: any[]) => any) {
+            callbacks.push(func);
         },
     };
 };
 const store1 = createStore(amountReducer, 100);
+store1.subscribe(() => {
+    console.log(store1.getState());
+});
 store1.dispatch({ type: 'add', value: 20 });
-console.log(store1.getState());
 store1.dispatch({ type: 'take', value: 50 });
-console.log(store1.getState());
 store1.dispatch({ type: 'add', value: 40 });
-console.log(store1.getState());
 store1.dispatch({ type: 'clear' });
-console.log(store1.getState());
