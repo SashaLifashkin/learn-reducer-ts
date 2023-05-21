@@ -1,4 +1,4 @@
-export const createStore = (reducer, initialState) => {
+export const createStore = (reducer, initialState = reducer(undefined, {})) => {
     let state = initialState;
     // const callbacks: Array<(...args: any[]) => any> = []
     // const callbacks: Array<(...args: unknown[]) => unknown> = []

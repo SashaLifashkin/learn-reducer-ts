@@ -1,6 +1,9 @@
 import type { Action } from './types';
 
-export const createStore = (reducer: (amount: number, action: Action) => number, initialState: number) => {
+export const createStore = (
+  reducer: (amount: number | undefined, action: Action) => number,
+  initialState = reducer(undefined, {})
+) => {
   let state = initialState;
   // const callbacks: Array<(...args: any[]) => any> = []
   // const callbacks: Array<(...args: unknown[]) => unknown> = []
