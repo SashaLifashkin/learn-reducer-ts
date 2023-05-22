@@ -113,5 +113,5 @@
     // },
     // "allowImportingTsExtensions": true
   },
-  "files": ["./app.ts", "./redux.ts", "store/amount.ts", "./goods.ts"],
+  "files": ["./app.ts", "./redux.ts", "store/amount.ts", "store/goods.ts"],
 }

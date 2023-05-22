@@ -1,10 +1,11 @@
-import type { Action, AmountReducer, GoodsReducer, Store } from './types';
+import type { Action, AmountReducer, GoodsReducer, Position, PositionReducer, Store } from './types';
 
 export function createStore (reducer: AmountReducer, initialState?: number): Store;
 export function createStore (reducer: GoodsReducer, initialState?: number[]): Store;
-export function createStore (reducer: (...params: any[]) => any, initialState?: number | number[]): Store {
+export function createStore (reducer: PositionReducer, initialState?: Position): Store;
+export function createStore (reducer: (...params: any[]) => any, initialState?: number | number[] | Position): Store {
   if (initialState === undefined) {
-    initialState = reducer(undefined, {})
+    initialState = reducer(undefined, {});
   }
 
   let state = initialState;

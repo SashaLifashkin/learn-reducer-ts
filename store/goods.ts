@@ -1,4 +1,4 @@
-import type { Action, GoodsReducer } from './types';
+import type { Action, GoodsReducer } from '../types';
 
 const ADD = 'ADD';
 const TAKE = 'TAKE';
