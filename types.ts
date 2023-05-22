@@ -18,3 +18,13 @@ export type Store = {
   dispatch: (action: Action) => void;
   subscribe: (func: (...args: unknown[]) => unknown) => void;
 };
+
+// ----------------------------------------------------------
+
+export type TotalInitialState = {
+  amount: number,
+  goods: number[],
+  position: Position,
+};
+
+export type TotalReducer = (state: TotalInitialState | undefined, action: Action) => TotalInitialState;
