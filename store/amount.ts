@@ -1,4 +1,4 @@
-import type { Action } from './types';
+import type { Action, AmountReducer } from '../types';
 
 const ADD = 'ADD';
 const TAKE = 'TAKE';
@@ -22,9 +22,9 @@ export const actions = {
       type: CLEAR,
     }
   },
-}
+};
 
-export const amountReducer = (amount: number | undefined = 0, action: Action): number => {
+export const amountReducer: AmountReducer = (amount = 0, action) => {
   if ('type' in action) {
     switch (action.type) {
       case ADD: {
