@@ -10,16 +10,14 @@ const totalInitialState: TotalInitialState = {
   position: { x: 0, y: 0 },
 };
 
-const totalReducer: TotalReducer = (state: TotalInitialState = totalInitialState, action: Action) => {
-  if ('type' in action) {
-    return {
-      amount: amountReducer(state.amount, action),
-      goods: goodsReducer(state.goods, action),
-      position: positionReducer(state.position, action),
-    };
-  } else {
-    return state;
-  }
+// debugger;
+
+const totalReducer: TotalReducer = (state: TotalInitialState = {}, action: Action) => {
+  return {
+    amount: 'amount' in state ? amountReducer(state.amount, action) : amountReducer(undefined, {}),
+    goods: 'goods' in state ? goodsReducer(state.goods, action) : goodsReducer(undefined, {}),
+    position: 'position' in state ? positionReducer(state.position, action) : positionReducer(undefined, {}),
+  };
 };
 
 const totalStore = createStore2(totalReducer);
@@ -28,12 +26,44 @@ totalStore.subscribe(() => {
   console.log(totalStore.getState());
 });
 
+// debugger;
+
 totalStore.dispatch(positionActions.moveRight());
 totalStore.dispatch(amountActions.add(50));
 totalStore.dispatch(amountActions.take(20));
 totalStore.dispatch(goodsActions.add(100));
 
+// ========================================================
+// const totalInitialState: TotalInitialState = {
+//   amount: 0,
+//   goods: [],
+//   position: { x: 0, y: 0 },
+// };
 
+// const totalReducer: TotalReducer = (state: TotalInitialState = totalInitialState, action: Action) => {
+//   if ('type' in action) {
+//     return {
+//       amount: amountReducer(state.amount, action),
+//       goods: goodsReducer(state.goods, action),
+//       position: positionReducer(state.position, action),
+//     };
+//   } else {
+//     return state;
+//   }
+// };
+
+// const totalStore = createStore2(totalReducer);
+
+// totalStore.subscribe(() => {
+//   console.log(totalStore.getState());
+// });
+
+// totalStore.dispatch(positionActions.moveRight());
+// totalStore.dispatch(amountActions.add(50));
+// totalStore.dispatch(amountActions.take(20));
+// totalStore.dispatch(goodsActions.add(100));
+
+// =======================================================
 
 // const store = createStore(amountReducer);
 // const store2 = createStore(goodsReducer);

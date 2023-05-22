@@ -11,7 +11,7 @@ export type Position = {
 
 export type AmountReducer = (amount: number | undefined, action: Action) => number;
 export type GoodsReducer = (goods: number[] | undefined, action: Action) => number[];
-export type PositionReducer = (position: Position, action: Action) => Position;
+export type PositionReducer = (position: Position | undefined, action: Action) => Position;
 
 export type Store = {
   getState: () => number | number[] | Position | undefined;
@@ -25,6 +25,6 @@ export type TotalInitialState = {
   amount: number,
   goods: number[],
   position: Position,
-};
+} | {};
 
 export type TotalReducer = (state: TotalInitialState | undefined, action: Action) => TotalInitialState;
