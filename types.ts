@@ -21,10 +21,18 @@ export type Store = {
 
 // ----------------------------------------------------------
 
-export type TotalInitialState = {
+export type TotalState = {
   amount: number,
   goods: number[],
   position: Position,
-} | {};
+};
+
+export type TotalInitialState = TotalState | {};
+
+export type Reducers = {
+  amount: AmountReducer,
+  goods: GoodsReducer,
+  position: PositionReducer,
+};
 
 export type TotalReducer = (state: TotalInitialState | undefined, action: Action) => TotalInitialState;

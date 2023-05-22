@@ -1,29 +1,35 @@
-import { createStore2 } from './redux.js';
-import { actions as amountActions, amountReducer } from './store/amount.js';
-import { actions as goodsActions, goodsReducer } from './store/goods.js';
-import { actions as positionActions, positionReducer } from './store/position.js';
+import { combineReducers, createStore2 } from './redux.js';
+import { amountReducer } from './store/amount.js';
+import { goodsReducer } from './store/goods.js';
+import { positionReducer } from './store/position.js';
 const totalInitialState = {
-    amount: 0,
-    goods: [],
+    amount: 99,
+    goods: [101],
     position: { x: 0, y: 0 },
 };
-// debugger;
-const totalReducer = (state = {}, action) => {
-    return {
-        amount: 'amount' in state ? amountReducer(state.amount, action) : amountReducer(undefined, {}),
-        goods: 'goods' in state ? goodsReducer(state.goods, action) : goodsReducer(undefined, {}),
-        position: 'position' in state ? positionReducer(state.position, action) : positionReducer(undefined, {}),
-    };
-};
-const totalStore = createStore2(totalReducer);
-totalStore.subscribe(() => {
-    console.log(totalStore.getState());
+const reducer2 = combineReducers({
+    amount: amountReducer,
+    goods: goodsReducer,
+    position: positionReducer
 });
-// debugger;
-totalStore.dispatch(positionActions.moveRight());
-totalStore.dispatch(amountActions.add(50));
-totalStore.dispatch(amountActions.take(20));
-totalStore.dispatch(goodsActions.add(100));
+const store4 = createStore2(reducer2, totalInitialState);
+console.log(store4.getState());
+// =====================================================
+// const totalReducer: TotalReducer = (state: TotalInitialState = {}, action: Action) => {
+//   return {
+//     amount: 'amount' in state ? amountReducer(state.amount, action) : amountReducer(undefined, {}),
+//     goods: 'goods' in state ? goodsReducer(state.goods, action) : goodsReducer(undefined, {}),
+//     position: 'position' in state ? positionReducer(state.position, action) : positionReducer(undefined, {}),
+//   };
+// };
+// const totalStore = createStore2(totalReducer, totalInitialState);
+// totalStore.subscribe(() => {
+//   console.log(totalStore.getState());
+// });
+// totalStore.dispatch(positionActions.moveRight());
+// totalStore.dispatch(amountActions.add(50));
+// totalStore.dispatch(amountActions.take(20));
+// totalStore.dispatch(goodsActions.add(100));
 // ========================================================
 // const totalInitialState: TotalInitialState = {
 //   amount: 0,
