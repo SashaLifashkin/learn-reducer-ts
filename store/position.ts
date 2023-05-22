@@ -33,25 +33,25 @@ export const positionReducer: PositionReducer = (
     switch (action.type) {
       case MOVE_RIGHT:
         return {
+          ...position,
           x: position.x + 1,
-          y: position.y
         };
         
       case MOVE_LEFT:
         return {
+          ...position,
           x: position.x - 1,
-          y: position.y
         };
         
       case MOVE_UP:
         return {
-          x: position.x,
+          ...position,
           y: position.y + 1
         };
         
       case MOVE_DOWN:
         return {
-          x: position.x,
+          ...position,
           y: position.y - 1
         };
         
